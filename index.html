@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regency Overseas | Corporativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFDFD; color: #333; scroll-behavior: smooth; }
+        .luxury-text { font-family: 'Playfair Display', serif; }
+        .bg-vino { background-color: #641E16; }
+        .text-vino { color: #641E16; }
+        .hero-gradient { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+            url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/625e6f59c0554196f740336f5e4f36f99428db7c/Prueba%20Web.jpg');
+            background-size: cover; background-position: center; 
+        }
+        .fade-in { animation: fadeIn 1.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-vino p-6 shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center text-white">
+            <h1 class="luxury-text text-2xl tracking-widest">REGENCY OVERSEAS</h1>
+            <p class="text-[9px] tracking-[0.3em] uppercase opacity-70 font-bold hidden md:block">Identity Portal</p>
+        </div>
+    </nav>
+
+    <header class="hero-gradient h-[60vh] flex items-center justify-center text-center text-white p-6">
+        <div class="fade-in space-y-6">
+            <h2 class="luxury-text text-5xl md:text-7xl">Regency Overseas</h2>
+            <p class="text-[12px] md:text-sm tracking-[0.5em] uppercase font-light">
+                Distribuidora oficial de <span class="font-bold">Guess Watches & Jewelry</span> y <span class="font-bold">Festina</span>
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-24 space-y-32">
+        
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-20 fade-in">
+            <div class="space-y-6">
+                <h3 class="luxury-text text-4xl border-l-4 border-vino pl-6">Misión</h3>
+                <p class="text-gray-500 text-lg leading-relaxed font-light italic">"Conectar las marcas más prestigiosas de relojería, joyería y accesorios con nuestros socios comerciales y clientes."</p>
+            </div>
+            <div class="space-y-6">
+                <h3 class="luxury-text text-4xl border-l-4 border-vino pl-6">Visión</h3>
+                <p class="text-gray-500 text-lg leading-relaxed font-light italic">"Ser la empresa líder reconocida por nuestra capacidad de conectar marcas con personas."</p>
+            </div>
+        </section>
+
+        <section class="space-y-16 fade-in">
+            <div class="text-center space-y-4">
+                <h3 class="luxury-text text-4xl text-gray-900">Nuestras Marcas</h3>
+                <div class="h-px w-24 bg-vino mx-auto mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Reloj%20Guess.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-2xl mb-2">Guess Watches</h4>
+                        <a href="https://guesswatches.com/" target="_blank" class="w-fit py-2 px-4 border border-white/50 rounded-full text-[8px] uppercase tracking-widest hover:bg-white hover:text-black transition no-underline text-white">Visitar Sitio</a>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Joyeria%20Guess.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-2xl mb-2">Guess Jewelry</h4>
+                        <a href="https://www.guess.mx/joyeria" target="_blank" class="w-fit py-2 px-4 border border-white/50 rounded-full text-[8px] uppercase tracking-widest hover:bg-white hover:text-black transition no-underline text-white">Ver Colección</a>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Festina.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-2xl mb-2">Festina</h4>
+                        <a href="https://festina.com/es-ES" target="_blank" class="w-fit py-2 px-4 border border-white/50 rounded-full text-[8px] uppercase tracking-widest hover:bg-white hover:text-black transition no-underline text-white">Explorar</a>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Lotus.png');"></div>
+                    <div class="absolute inset-0 bg-black/40 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-2xl mb-2">Lotus</h4>
+                        <a href="https://lotus-watches.com/es-ES" target="_blank" class="w-fit py-2 px-4 border border-white/50 rounded-full text-[8px] uppercase tracking-widest hover:bg-white hover:text-black transition no-underline text-white">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in py-20 border-t border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div class="space-y-6">
+                    <h3 class="luxury-text text-4xl">Contacto</h3>
+                    <p class="text-gray-500 font-light">CDMX, México<br>contacto@regencyoverseas.com.mx</p>
+                </div>
+                <form class="space-y-6">
+                    <input type="text" placeholder="Nombre" class="w-full border-b py-2 outline-none focus:border-vino">
+                    <input type="email" placeholder="Correo" class="w-full border-b py-2 outline-none focus:border-vino">
+                    <textarea placeholder="Mensaje" class="w-full border-b py-2 outline-none focus:border-vino resize-none"></textarea>
+                    <button type="button" class="w-full py-4 bg-vino text-white rounded-full text-[10px] font-bold uppercase tracking-widest">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 text-center text-gray-400 text-[8px] tracking-[0.5em] uppercase">
+        © 2026 Regency Overseas Global Operations
+    </footer>
+</body>
+</html>
