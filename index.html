@@ -234,7 +234,7 @@
         <p class="text-gray-400 text-xs font-light">Déjanos tus datos y un especialista se pondrá en contacto contigo.</p>
     </div>
     
-    <form id="contact-form" action="https://formspree.io/f/xvzvnoyl" method="POST" class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50 space-y-8 transition-all duration-700">
+    <form id="contact-form" action="https://formspree.io/f/TU_ID_REAL" method="POST" class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50 space-y-8 transition-all duration-700">
         <div class="space-y-2">
             <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Nombre Completo</label>
             <input type="text" name="name" required class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light bg-transparent">
@@ -252,14 +252,26 @@
         </div>
 
         <div class="space-y-2">
-            <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Mensaje</label>
-            <textarea name="message" rows="1" required class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light resize-none bg-transparent"></textarea>
+            <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Mensaje corporativo</label>
+            <textarea name="message" rows="3" required class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light resize-none bg-transparent"></textarea>
         </div>
 
         <button type="submit" id="submit-btn" class="w-full py-5 bg-vino text-white rounded-full text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-black transition duration-500 shadow-xl">
             Enviar Solicitud
         </button>
     </form>
+
+    <div id="success-message" class="hidden flex flex-col items-center justify-center p-20 text-center space-y-4 fade-in">
+        <div class="h-16 w-16 bg-vino/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa-solid fa-check text-vino text-2xl"></i>
+        </div>
+        <h4 class="luxury-text text-3xl text-gray-900">Gracias por su interés</h4>
+        <p class="text-gray-500 font-light text-sm max-w-xs mx-auto leading-relaxed">
+            Sus datos han sido recibidos con éxito. Un consultor especializado de Regency se pondrá en contacto con usted a la brevedad.
+        </p>
+        <div class="h-px w-20 bg-vino/20 mt-6"></div>
+    </div>
+</div>
 
     <div id="success-message" class="hidden flex flex-col items-center justify-center p-20 text-center space-y-4 fade-in">
         <div class="h-16 w-16 bg-vino/10 rounded-full flex items-center justify-center mb-4">
