@@ -296,5 +296,52 @@
             © 2026 México City | 
         </p>
     </footer>
+
+<script>
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.onsubmit = async (e) => {
+        e.preventDefault(); // Detiene la redirección
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "PROCESANDO...";
+        submitBtn.style.opacity = "0.7";
+
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                // Animación de salida del formulario
+                form.classList.add('opacity-0', 'scale-95');
+                
+                setTimeout(() => {
+                    form.style.display = 'none'; // Desaparece el formulario
+                    successMessage.classList.remove('hidden'); // Aparece el mensaje de lujo
+                    form.reset(); // Limpia los datos
+                }, 500);
+            } else {
+                alert("Error de comunicación. Asegúrate de haber puesto tu ID de Formspree correctamente.");
+                resetBtn();
+            }
+        } catch (error) {
+            alert("Error de conexión. Intente de nuevo.");
+            resetBtn();
+        }
+    };
+
+    function resetBtn() {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "ENVIAR SOLICITUD";
+        submitBtn.style.opacity = "1";
+    }
+</script>    
 </body>
 </html>
