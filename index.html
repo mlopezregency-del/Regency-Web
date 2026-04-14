@@ -61,8 +61,20 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
+<body class="bg-[#FDFDFD]">
 
-    <body>
+    <nav class="bg-vino text-white py-4 px-8 flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <div class="luxury-text text-xl tracking-[0.3em]">
+            REGENCY OVERSEAS
+        </div>
+        <div class="hidden md:flex space-x-10">
+            <a href="#quienes-somos" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Nosotros</a>
+            <a href="#filosofia" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Filosofía</a>
+            <a href="#marcas" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Marcas</a>
+            <a href="#contacto" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Contacto</a>
+        </div>
+    </nav>
+
     <header class="hero-video-container">
         <video autoplay muted loop playsinline class="video-bg">
             <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/2d4a05a4b2c4cebe50d52ce726b65b0d7414684d/Web/Video%20Web.mp4" type="video/mp4">
@@ -72,49 +84,24 @@
         <div class="overlay-dark"></div>
 
         <div class="relative z-10 text-center text-white px-6 fade-in">
-            <h1 class="luxury-text text-5xl md:text-8xl mb-4 drop-shadow-2xl tracking-wider">
-                REGENCY OVERSEAS
+            <h1 class="luxury-text text-5xl md:text-8xl mb-4 drop-shadow-2xl tracking-wider uppercase">
+                Regency Overseas
             </h1>
-            <p class="text-[10px] md:text-sm tracking-[0.6em] uppercase font-light opacity-80">
-                Distribuidor Oficial en México de Relojes y Joyería
+            <p class="text-[10px] md:text-xs tracking-[0.5em] uppercase font-light italic">
+                Distribuidor Oficial de <span class="font-bold">Guess Watches & Jewelry</span> y <span class="font-bold">Festina</span>
             </p>
             <div class="h-px w-24 bg-white/30 mx-auto mt-10"></div>
         </div>
     </header>
 
+    <main id="quienes-somos" class="scroll-mt-32">
+        </main>
+
     <script>
         lucide.createIcons();
     </script>
 </body>
-
-
-    
-<body>
-    <nav class="bg-vino text-white py-4 px-8 flex justify-between items-center sticky top-0 z-50 shadow-md">
-        
-        <div class="luxury-text text-xl tracking-[0.3em]">
-            REGENCY OVERSEAS
-        </div>
-    
-        <div class="hidden md:flex space-x-10">
-            <a href="#quienes-somos" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Nosotros</a>
-            <a href="#filosofia" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Filosofía</a>
-            <a href="#marcas" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Marcas</a>
-            <a href="#contacto" class="text-[9px] tracking-[0.3em] uppercase hover:opacity-70 transition duration-300 font-light">Contacto</a>
-        </div>
-    </nav>
-
-    <header class="hero-gradient h-[60vh] relative flex flex-col items-center justify-center text-center text-white p-6"> 
-        <div class="fade-in space-y-6">
-            <h2 class="luxury-text text-5xl md:text-7xl">Regency Overseas</h2>
-            <p class="text-[10px] md:text-xs tracking-[0.2em] uppercase font-light italic">
-                Distribuidora oficial de <span class="font-bold">Guess Watches & Jewelry</span> y <span class="font-bold">Festina</span>
-            </p>
-            <div class="h-px w-32 bg-white/30 mx-auto mt-8"></div>
-        </div>
-    </header>
-
-</header>
+</html>
 
 <section id="quienes-somos" class="max-w-6xl mx-auto px-6 py-32 fade-in">
     <div class="mb-16">
