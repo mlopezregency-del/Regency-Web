@@ -16,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Configuración base y Scroll Suave */
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background-color: #FDFDFD; color: #333; margin: 0; }
         
@@ -24,10 +23,9 @@
         .bg-vino { background-color: #641E16; }
         .text-vino { color: #641E16; }
         
-        /* Contenedor del Video Hero */
         .hero-video-container {
             position: relative;
-            height: 70vh; /* Altura de pantalla completa */
+            height: 70vh; 
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -35,7 +33,6 @@
             justify-content: center;
         }
 
-        /* El video estirado para cubrir todo el fondo */
         .video-bg {
             position: absolute;
             top: 50%;
@@ -49,7 +46,6 @@
             z-index: -2;
         }
 
-        /* La capa negra con 50% de opacidad para el look Luxury */
         .overlay-dark {
             position: absolute;
             inset: 0;
@@ -80,6 +76,7 @@
     </div>
 
     <div class="hidden md:flex gap-8 items-center text-xs tracking-widest">
+        <a href="#quienes-somos" class="hover:text-gray-300 transition-colors">NOSOTROS</a>
         <a href="#nosotros" class="hover:text-gray-300 transition-colors">NOSOTROS</a>
         <a href="#filosofia" class="hover:text-gray-300 transition-colors">FILOSOFÍA</a>
         <a href="#marcas" class="hover:text-gray-300 transition-colors">MARCAS</a>
@@ -105,16 +102,13 @@
         </div>
     </header>
 
-    <main id="quienes-somos" class="scroll-mt-32">
-        </main>
-
     <script>
         lucide.createIcons();
     </script>
 </body>
 </html>
 
-<section id="quienes-somos" class="max-w-6xl mx-auto px-6 py-32 fade-in">
+<section id="quienes-somos" class="max-w-6xl mx-auto px-6 py-32 fade-in scroll-mt-24">
     <div class="mb-16">
         <h3 class="luxury-text text-4xl md:text-5xl text-gray-900 opacity-90">Quiénes Somos</h3>
     </div>
