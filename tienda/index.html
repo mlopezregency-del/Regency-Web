@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regency Overseas | Portal de Activos Privado</title>
+    <title>Regency | Venta Privada Corporativa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b5e4caa42e3f08917d17cd4393dbf63b74a7d9fb/Logo%20PNG1.png" type="image/png">
@@ -35,40 +35,44 @@
         <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-40">
             <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/Video%20Web.mp4" type="video/mp4">
         </video>
-        <h1 class="relative luxury-text text-white text-3xl uppercase tracking-widest">Venta Privada Corporativa</h1>
+        <h1 class="relative luxury-text text-white text-3xl uppercase tracking-widest text-center">Venta Privada Corporativa</h1>
     </header>
 
     <main class="max-w-7xl mx-auto p-8 w-full flex-grow">
         <div id="grid-productos" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <p class="col-span-full text-center text-gray-400 animate-pulse uppercase tracking-widest text-xs">Sincronizando inventario con el repositorio...</p>
+            <p class="col-span-full text-center text-gray-400 animate-pulse uppercase tracking-widest text-xs">Cargando existencias...</p>
         </div>
     </main>
 
     <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white shadow-2xl z-[100] translate-x-full flex flex-col">
         <div class="p-6 bg-vino text-white flex justify-between items-center">
-            <h2 class="luxury-text text-xl uppercase tracking-tight">Resumen de Pedido</h2>
-            <button onclick="toggleCart()" class="hover:rotate-90 transition duration-300"><i data-lucide="x"></i></button>
+            <h2 class="luxury-text text-xl uppercase tracking-tight">Tu Selección</h2>
+            <button onclick="toggleCart()"><i data-lucide="x"></i></button>
         </div>
         
         <div id="cart-items" class="flex-grow p-6 overflow-y-auto space-y-4">
             </div>
 
-        <div class="p-8 border-t border-gray-100 bg-gray-50 space-y-4">
-            <div class="space-y-2">
-                <label class="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Datos del Colaborador</label>
-                <input type="text" id="nombre-empleado" placeholder="Nombre Completo" class="w-full p-3 border rounded-xl text-sm focus:ring-1 focus:ring-vino outline-none">
-                <input type="text" id="id-empleado" placeholder="ID de Empleado (Opcional)" class="w-full p-3 border rounded-xl text-sm focus:ring-1 focus:ring-vino outline-none">
+        <form action="https://formspree.io/f/xvzvnoyl" method="POST" class="p-8 border-t border-gray-100 bg-gray-50 space-y-4">
+            <div class="space-y-3">
+                <label class="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Información de contacto</label>
+                <input type="text" name="Nombre" required placeholder="Nombre Completo" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-vino">
+                <input type="email" name="Email" required placeholder="Correo Corporativo" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-vino">
+                <input type="tel" name="Telefono" placeholder="Celular (Opcional)" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-vino">
+                
+                <textarea name="DETALLES_SAP" id="sap-output" class="hidden"></textarea>
             </div>
 
             <div class="flex justify-between font-bold text-lg border-t border-b py-4 my-4">
-                <span class="luxury-text uppercase text-sm">Total a procesar:</span>
+                <span class="luxury-text uppercase text-xs">Subtotal estimado:</span>
                 <span id="cart-total" class="text-vino font-black">$0</span>
             </div>
             
-            <button onclick="enviarPedidoPorCorreo()" class="w-full py-4 bg-vino text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all shadow-lg">
-                Enviar Pedido a SAP (E-mail)
+            <button type="submit" class="w-full py-4 bg-vino text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all shadow-lg">
+                Confirmar y Enviar Pedido
             </button>
-        </div>
+            <p class="text-[8px] text-gray-400 text-center uppercase">Disponibilidad sujeta a validación en almacén</p>
+        </form>
     </div>
 
     <script>
@@ -78,7 +82,6 @@
         let carrito = [];
 
         function cargarDatos() {
-            // Se agrega un parámetro de tiempo para evitar que el navegador use una versión vieja del CSV (Caché)
             Papa.parse(`${URL_CSV}?t=${new Date().getTime()}`, {
                 download: true,
                 header: true,
@@ -90,53 +93,49 @@
             });
         }
 
-       function render() {
-    const grid = document.getElementById('grid-productos');
-    grid.innerHTML = inventario.map((p, index) => {
-        
-        // --- LÓGICA DE RUTAS DINÁMICAS (Traducción de tu Power BI) ---
-        const codigo = String(p.codigo).trim();
-        const prefijo = codigo.substring(0, 2);
-        let subCarpeta = "";
+        function render() {
+            const grid = document.getElementById('grid-productos');
+            grid.innerHTML = inventario.map((p, index) => {
+                
+                // LÓGICA DE CARPETAS SEGÚN TU ESTRUCTURA DE GITHUB
+                const codigo = String(p.codigo).trim();
+                const prefijo = codigo.substring(0, 2);
+                let subCarpeta = "";
 
-        if (["15", "18", "LS"].includes(prefijo)) {
-            subCarpeta = "Lotus/";
-        } else if (["F1", "F2"].includes(prefijo)) {
-            subCarpeta = "Festina/";
-        } else if (codigo.startsWith("GW")) {
-            subCarpeta = "GuessWatches/";
-        } else if (["JM", "JS", "JU", "W1", "Y1", "Y2", "Y4", "Y5", "Y6", "Y7", "Y8", "Y9", "Z0", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6"].includes(prefijo)) {
-            subCarpeta = "GuessJewelry/";
+                if (["15", "18", "LS"].includes(prefijo)) { subCarpeta = "Lotus/"; }
+                else if (["F1", "F2"].includes(prefijo)) { subCarpeta = "Festina/"; }
+                else if (codigo.startsWith("GW")) { subCarpeta = "GuessWatches/"; }
+                else if (["JM", "JS", "JU", "W1", "Y1", "Y2", "Y4", "Y5", "Y6", "Y7", "Y8", "Y9", "Z0", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6"].includes(prefijo)) {
+                    subCarpeta = "GuessJewelry/";
+                }
+                
+                const fotoUrl = `${RUTA_FOTOS}${subCarpeta}${codigo}.png`;
+                const agotado = p.cantidad <= 0;
+
+                return `
+                <div class="bg-white rounded-[30px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 fade-in group">
+                    <div class="aspect-square bg-[#F9F9F9] rounded-[20px] mb-6 flex items-center justify-center p-4 overflow-hidden">
+                        <img src="${fotoUrl}" 
+                             class="max-h-full group-hover:scale-110 transition duration-700" 
+                             onerror="this.src='https://placehold.co/300x300/f8f8f8/641e16?text=${codigo}'">
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[8px] font-black text-gray-300 uppercase tracking-widest">${p.marca}</span>
+                            <span class="text-[8px] font-bold ${agotado ? 'text-red-400' : 'text-green-500'} uppercase italic">Stock: ${p.cantidad}</span>
+                        </div>
+                        <h3 class="luxury-text text-lg text-gray-800 leading-tight">${codigo}</h3>
+                        <p class="text-vino font-black text-xl">$${Number(p.precio).toLocaleString()}</p>
+                        <button onclick="agregarAlCarrito(${index})" 
+                                class="w-full py-3 ${agotado ? 'bg-gray-200 cursor-not-allowed' : 'bg-vino hover:bg-black'} text-white rounded-xl text-[9px] font-bold uppercase tracking-widest transition"
+                                ${agotado ? 'disabled' : ''}>
+                            ${agotado ? 'Agotado' : 'Añadir al Pedido'}
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+            lucide.createIcons();
         }
-        
-        const foto = `${RUTA_FOTOS}${subCarpeta}${codigo}.png`;
-        // -----------------------------------------------------------
-
-        const agotado = p.cantidad <= 0;
-        return `
-        <div class="bg-white rounded-[40px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 fade-in group">
-            <div class="aspect-square bg-[#F9F9F9] rounded-[20px] mb-6 flex items-center justify-center p-4 overflow-hidden">
-                <img src="${foto}" 
-                     class="max-h-full group-hover:scale-110 transition duration-700" 
-                     onerror="this.src='https://placehold.co/300x300/f8f8f8/641e16?text=${codigo}'">
-            </div>
-            <div class="space-y-3">
-                <div class="flex justify-between items-start">
-                    <span class="text-[8px] font-black text-gray-300 uppercase tracking-widest">${p.marca}</span>
-                    <span class="text-[8px] font-bold ${agotado ? 'text-red-400' : 'text-green-500'} uppercase italic">Stock: ${p.cantidad}</span>
-                </div>
-                <h3 class="luxury-text text-lg text-gray-800 leading-tight">${codigo}</h3>
-                <p class="text-vino font-black text-xl">$${Number(p.precio).toLocaleString()}</p>
-                <button onclick="agregarAlCarrito(${index})" 
-                        class="w-full py-3 ${agotado ? 'bg-gray-200 cursor-not-allowed' : 'bg-vino hover:bg-black'} text-white rounded-xl text-[9px] font-bold uppercase tracking-widest transition"
-                        ${agotado ? 'disabled' : ''}>
-                    ${agotado ? 'Sin Existencias' : 'Añadir al Pedido'}
-                </button>
-            </div>
-        </div>`;
-    }).join('');
-    lucide.createIcons();
-}
 
         function agregarAlCarrito(index) {
             if(inventario[index].cantidad > 0) {
@@ -150,16 +149,12 @@
         function actualizarCarrito() {
             document.getElementById('cart-count').innerText = carrito.length;
             const itemsCont = document.getElementById('cart-items');
+            
             itemsCont.innerHTML = carrito.map((item, i) => `
-                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100 fade-in">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1">
-                            <img src="${RUTA_FOTOS}${item.codigo}.png" class="max-h-full" onerror="this.hidden=true">
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-gray-800">${item.codigo}</p>
-                            <p class="text-vino text-[10px] font-bold">$${item.precio.toLocaleString()}</p>
-                        </div>
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <div>
+                        <p class="text-xs font-bold text-gray-800">${item.codigo}</p>
+                        <p class="text-vino text-[10px] font-bold">$${item.precio.toLocaleString()}</p>
                     </div>
                     <button onclick="quitarDelCarrito(${i})" class="text-gray-300 hover:text-red-500 transition"><i data-lucide="trash-2" size="16"></i></button>
                 </div>
@@ -167,13 +162,23 @@
             
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             document.getElementById('cart-total').innerText = `$${total.toLocaleString()}`;
+
+            // GENERAR EL LAYOUT PARA SAP EN EL CAMPO OCULTO
+            let sapText = "NUEVO PEDIDO REGENCY\n";
+            sapText += "------------------------\n";
+            sapText += "CODIGO\tCANT\tPRECIO\n";
+            carrito.forEach(item => {
+                sapText += `${item.codigo}\t1\t${item.precio}\n`;
+            });
+            document.getElementById('sap-output').value = sapText;
+
             lucide.createIcons();
         }
 
         function quitarDelCarrito(i) {
             const item = carrito[i];
             const idxOriginal = inventario.findIndex(p => p.codigo === item.codigo);
-            inventario[idxOriginal].cantidad++;
+            if(idxOriginal !== -1) inventario[idxOriginal].cantidad++;
             carrito.splice(i, 1);
             actualizarCarrito();
             render();
@@ -181,38 +186,6 @@
 
         function toggleCart() {
             document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
-        }
-
-        function enviarPedidoPorCorreo() {
-            const nombre = document.getElementById('nombre-empleado').value;
-            const idEmp = document.getElementById('id-empleado').value || 'N/A';
-
-            if(!nombre || carrito.length === 0) {
-                alert("Por favor, ingresa tu nombre y añade al menos un producto.");
-                return;
-            }
-
-            // ESTRUCTURA DE DATOS PARA SAP (Layout de carga manual)
-            let sapLayout = "SOLICITUD DE VENTA PRIVADA\r\n";
-            sapLayout += "============================\r\n";
-            sapLayout += `COLABORADOR: ${nombre}\r\n`;
-            sapLayout += `ID EMPLEADO: ${idEmp}\r\n`;
-            sapLayout += "============================\r\n\r\n";
-            sapLayout += "CODIGO\tCANT\tPRECIO_UNIT\tTOTAL\r\n";
-            
-            carrito.forEach(item => {
-                sapLayout += `${item.codigo}\t1\t${item.precio}\t${item.precio}\r\n`;
-            });
-
-            const totalFinal = carrito.reduce((sum, item) => sum + item.precio, 0);
-            sapLayout += `\r\nTOTAL DEL PEDIDO: $${totalFinal.toLocaleString()} MXN`;
-
-            const subject = encodeURIComponent(`Nuevo Pedido Regency: ${nombre}`);
-            const body = encodeURIComponent(sapLayout);
-            
-            window.location.href = `mailto:negocios@regency.com.mx?subject=${subject}&body=${body}`;
-            
-            alert("Se abrirá tu gestor de correo para enviar la transacción.");
         }
 
         window.onload = cargarDatos;
