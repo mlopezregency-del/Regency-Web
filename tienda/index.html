@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regency | Venta Privada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFDFD; }
+        .luxury-text { font-family: 'Playfair Display', serif; }
+        .bg-vino { background-color: #641E16; }
+        .text-vino { color: #641E16; }
+        .fade-in { animation: fadeIn 1s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .product-card:hover img { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-vino p-6 shadow-2xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center text-white">
+            <a href="../index.html" class="luxury-text text-2xl tracking-[0.2em] no-underline text-white uppercase">Regency Overseas</a>
+            <div class="text-right">
+                <p class="text-[9px] tracking-[0.3em] uppercase font-bold">Portal de Empleados</p>
+                <p id="counter" class="text-[8px] text-gray-400 uppercase">Stock Validado en Tiempo Real</p>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative h-[30vh] overflow-hidden flex items-center justify-center bg-black">
+        <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-50">
+            <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/Video%20Web.mp4" type="video/mp4">
+        </video>
+        <h1 class="relative luxury-text text-white text-4xl md:text-6xl tracking-widest uppercase fade-in">Venta Privada</h1>
+    </div>
+
+    <main class="max-w-7xl mx-auto p-12">
+        <div id="grid-productos" class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            </div>
+    </main>
+
+    <script>
+        // BASE DE DATOS (Stock inicial)
+        const PRODUCTOS_INICIALES = [
+            { id: "F200095", nombre: "Festina Swiss Made", precio: "$5,200", stock: 5, img: "https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/fe4ab8e7671b54a49d9aed3ee56b81e993d91acb/F200095.png" },
+            { id: "GW1018L2", nombre: "Guess Gold Iconic", precio: "$4,850", stock: 3, img: "https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/fe4ab8e7671b54a49d9aed3ee56b81e993d91acb/GW1018L2.png" },
+            { id: "GW1038L1", nombre: "Guess Diamond Edition", precio: "$5,900", stock: 1, img: "https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/fe4ab8e7671b54a49d9aed3ee56b81e993d91acb/GW1038L1.png" }
+        ];
+
+        // Cargar stock de memoria o iniciar
+        let inventario = JSON.parse(localStorage.getItem('regency_stock')) || PRODUCTOS_INICIALES;
+
+        function render() {
+            const grid = document.getElementById('grid-productos');
+            grid.innerHTML = '';
+            
+            inventario.forEach((p, index) => {
+                const btnHTML = p.stock > 0 
+                    ? `<button onclick="comprar(${index})" class="w-full py-4 bg-vino text-white rounded-2xl text-[10px] font-bold tracking-widest uppercase hover:bg-black transition transform active:scale-95">Apartar Reloj</button>`
+                    : `<button disabled class="w-full py-4 bg-gray-200 text-gray-400 rounded-2xl text-[10px] font-bold tracking-widest uppercase cursor-not-allowed">Agotado</button>`;
+
+                grid.innerHTML += `
+                    <div class="product-card bg-white rounded-[40px] p-6 shadow-sm border border-gray-50 hover:shadow-2xl transition duration-500 fade-in">
+                        <div class="aspect-square bg-[#F9F9F9] rounded-[30px] mb-6 flex items-center justify-center p-8 overflow-hidden">
+                            <img src="${p.img}" class="max-h-full transition duration-700">
+                        </div>
+                        <div class="space-y-4">
+                            <p class="text-[9px] text-gray-400 font-bold tracking-widest uppercase">${p.id}</p>
+                            <h3 class="luxury-text text-2xl text-gray-800">${p.nombre}</h3>
+                            <div class="flex justify-between items-center border-b border-gray-50 pb-4">
+                                <span class="text-vino font-bold text-lg">${p.precio}</span>
+                                <span class="text-[10px] font-black ${p.stock > 0 ? 'text-green-600' : 'text-red-400'} uppercase italic">Stock: ${p.stock}</span>
+                            </div>
+                            ${btnHTML}
+                        </div>
+                    </div>
+                `;
+            });
+            localStorage.setItem('regency_stock', JSON.stringify(inventario));
+        }
+
+        function comprar(index) {
+            if(inventario[index].stock > 0) {
+                inventario[index].stock--;
+                alert("¡Apartado exitoso! Se ha reservado 1 unidad de " + inventario[index].nombre);
+                render();
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>
