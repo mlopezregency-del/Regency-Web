@@ -129,25 +129,25 @@
                 const fotoUrl = `${RUTA_FOTOS}${sub}${codigo}.png`;
                 const agotado = p.cantidad <= 0;
 
-                return `
-                <div class="bg-white rounded-[40px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 fade-in group">
-                    <div class="aspect-square bg-[#F9F9F9] rounded-[20px] mb-6 flex items-center justify-center p-4 overflow-hidden">
-                        <img src="${fotoUrl}" class="max-h-full group-hover:scale-110 transition duration-700" onerror="this.src='https://placehold.co/300x300/f8f8f8/641e16?text=${codigo}'">
+            return `
+            <div class="bg-white rounded-[40px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 fade-in group">
+                <div class="aspect-square bg-[#F9F9F9] rounded-[20px] mb-6 flex items-center justify-center p-1 overflow-hidden">
+                    <img src="${fotoUrl}" class="max-h-full group-hover:scale-110 transition duration-700" onerror="this.src='https://placehold.co/300x300/f8f8f8/641e16?text=${codigo}'">
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[8px] font-black text-gray-400 uppercase tracking-widest">${codigo}</span>
+                        <span class="text-[8px] font-bold ${agotado ? 'text-red-400' : 'text-green-500'} uppercase italic">Stock: ${p.cantidad}</span>
                     </div>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[8px] font-black text-gray-300 uppercase tracking-widest">${p.marca}</span>
-                            <span class="text-[8px] font-bold ${agotado ? 'text-red-400' : 'text-green-500'} uppercase italic">Stock: ${p.cantidad}</span>
-                        </div>
-                        <h3 class="luxury-text text-lg text-gray-800 leading-tight">${codigo}</h3>
-                        <p class="text-vino font-black text-xl">$${Number(p.precio).toLocaleString()}</p>
-                        <button onclick="agregarAlCarrito(${index})" 
-                                class="w-full py-3 ${agotado ? 'bg-gray-200 cursor-not-allowed' : 'bg-vino hover:bg-black'} text-white rounded-xl text-[9px] font-bold uppercase tracking-widest transition"
-                                ${agotado ? 'disabled' : ''}>
-                            ${agotado ? 'Agotado' : 'Añadir al Pedido'}
-                        </button>
-                    </div>
-                </div>`;
+                    <h3 class="luxury-text text-xl text-gray-900 leading-tight uppercase">${p.marca}</h3>
+                    <p class="text-vino font-black text-xl">$${Number(p.precio).toLocaleString()}</p>
+                    <button onclick="agregarAlCarrito(${index})" 
+                            class="w-full py-3 ${agotado ? 'bg-gray-200 cursor-not-allowed' : 'bg-vino hover:bg-black'} text-white rounded-xl text-[9px] font-bold uppercase tracking-widest transition"
+                            ${agotado ? 'disabled' : ''}>
+                        ${agotado ? 'Agotado' : 'Añadir al Pedido'}
+                    </button>
+                </div>
+            </div>`;
             }).join('');
             lucide.createIcons();
         }
