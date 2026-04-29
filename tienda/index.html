@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regency | Portal Privado de Activos</title>
+    <title>Regency Overseas | Portal de Activos Privado</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -13,8 +13,9 @@
         .luxury-text { font-family: 'Playfair Display', serif; }
         .bg-vino { background-color: #641E16; }
         .text-vino { color: #641E16; }
-        .fade-in { animation: fadeIn 0.8s ease-out; }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        #cart-sidebar { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -22,47 +23,49 @@
     <nav class="bg-vino text-white p-6 sticky top-0 z-50 shadow-2xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="luxury-text text-xl tracking-[0.3em] uppercase italic">Regency Overseas</div>
-            <div class="flex items-center gap-6">
-                <button onclick="toggleCart()" class="relative p-2 hover:bg-white/10 rounded-full transition">
-                    <i data-lucide="shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-vino text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">0</span>
-                </button>
-            </div>
+            <button onclick="toggleCart()" class="relative p-2 hover:bg-white/10 rounded-full transition">
+                <i data-lucide="shopping-bag"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-vino text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">0</span>
+            </button>
         </div>
     </nav>
 
-    <header class="relative h-[25vh] overflow-hidden flex items-center justify-center bg-black">
+    <header class="relative h-[20vh] overflow-hidden flex items-center justify-center bg-black">
         <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-40">
             <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/Video%20Web.mp4" type="video/mp4">
         </video>
-        <h1 class="relative luxury-text text-white text-4xl uppercase tracking-widest fade-in">Venta de Bodega</h1>
+        <h1 class="relative luxury-text text-white text-3xl uppercase tracking-widest">Venta Privada Corporativa</h1>
     </header>
 
-    <main class="max-w-7xl mx-auto p-12 w-full flex-grow">
+    <main class="max-w-7xl mx-auto p-8 w-full flex-grow">
         <div id="grid-productos" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            </div>
+            <p class="col-span-full text-center text-gray-400 animate-pulse uppercase tracking-widest text-xs">Sincronizando inventario con el repositorio...</p>
+        </div>
     </main>
 
-    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-500 flex flex-col">
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white shadow-2xl z-[100] translate-x-full flex flex-col">
         <div class="p-6 bg-vino text-white flex justify-between items-center">
-            <h2 class="luxury-text text-xl">Tu Selección</h2>
-            <button onclick="toggleCart()"><i data-lucide="x"></i></button>
+            <h2 class="luxury-text text-xl uppercase tracking-tight">Resumen de Pedido</h2>
+            <button onclick="toggleCart()" class="hover:rotate-90 transition duration-300"><i data-lucide="x"></i></button>
         </div>
         
-        <div id="cart-items" class="flex-grow p-6 overflow-y-auto space-y-4 text-sm">
+        <div id="cart-items" class="flex-grow p-6 overflow-y-auto space-y-4">
             </div>
 
-        <div class="p-6 border-t border-gray-100 space-y-4 bg-gray-50">
-            <input type="text" id="nombre-empleado" placeholder="Nombre Completo" class="w-full p-3 border rounded-xl text-sm mb-2">
-            <input type="email" id="correo-empleado" placeholder="Correo Corporativo" class="w-full p-3 border rounded-xl text-sm">
-            
-            <div class="flex justify-between font-bold text-lg py-2">
-                <span>Total:</span>
-                <span id="cart-total">$0</span>
+        <div class="p-8 border-t border-gray-100 bg-gray-50 space-y-4">
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Datos del Colaborador</label>
+                <input type="text" id="nombre-empleado" placeholder="Nombre Completo" class="w-full p-3 border rounded-xl text-sm focus:ring-1 focus:ring-vino outline-none">
+                <input type="text" id="id-empleado" placeholder="ID de Empleado (Opcional)" class="w-full p-3 border rounded-xl text-sm focus:ring-1 focus:ring-vino outline-none">
+            </div>
+
+            <div class="flex justify-between font-bold text-lg border-t border-b py-4 my-4">
+                <span class="luxury-text uppercase text-sm">Total a procesar:</span>
+                <span id="cart-total" class="text-vino font-black">$0</span>
             </div>
             
-            <button onclick="enviarPedido()" class="w-full py-4 bg-vino text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-black transition">
-                Confirmar y Generar Output SAP
+            <button onclick="enviarPedidoPorCorreo()" class="w-full py-4 bg-vino text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all shadow-lg">
+                Enviar Pedido a SAP (E-mail)
             </button>
         </div>
     </div>
@@ -74,8 +77,11 @@
         let carrito = [];
 
         function cargarDatos() {
-            Papa.parse(URL_CSV, {
-                download: true, header: true, dynamicTyping: true,
+            // Se agrega un parámetro de tiempo para evitar que el navegador use una versión vieja del CSV (Caché)
+            Papa.parse(`${URL_CSV}?t=${new Date().getTime()}`, {
+                download: true,
+                header: true,
+                dynamicTyping: true,
                 complete: function(results) {
                     inventario = results.data.filter(p => p.codigo);
                     render();
@@ -85,27 +91,35 @@
 
         function render() {
             const grid = document.getElementById('grid-productos');
-            grid.innerHTML = inventario.map((p, index) => `
-                <div class="bg-white rounded-[30px] p-6 shadow-sm border border-gray-100 fade-in">
-                    <img src="${RUTA_FOTOS}${p.codigo}.png" class="h-48 w-full object-contain mb-4" onerror="this.src='https://placehold.co/200x200?text=${p.codigo}'">
-                    <div class="space-y-2">
-                        <p class="text-[10px] text-gray-400 font-bold uppercase">${p.marca}</p>
-                        <h3 class="font-bold text-gray-800">${p.codigo}</h3>
-                        <p class="text-vino font-bold">$${p.precio.toLocaleString()}</p>
+            grid.innerHTML = inventario.map((p, index) => {
+                const foto = `${RUTA_FOTOS}${p.codigo}.png`;
+                const agotado = p.cantidad <= 0;
+                return `
+                <div class="bg-white rounded-[30px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 fade-in group">
+                    <div class="aspect-square bg-[#F9F9F9] rounded-[20px] mb-6 flex items-center justify-center p-4 overflow-hidden">
+                        <img src="${foto}" class="max-h-full group-hover:scale-110 transition duration-700" onerror="this.src='https://placehold.co/300x300/f8f8f8/641e16?text=${p.codigo}'">
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[8px] font-black text-gray-300 uppercase tracking-widest">${p.marca}</span>
+                            <span class="text-[8px] font-bold ${agotado ? 'text-red-400' : 'text-green-500'} uppercase italic">Stock: ${p.cantidad}</span>
+                        </div>
+                        <h3 class="luxury-text text-lg text-gray-800 leading-tight">${p.codigo}</h3>
+                        <p class="text-vino font-black text-xl">$${Number(p.precio).toLocaleString()}</p>
                         <button onclick="agregarAlCarrito(${index})" 
-                                class="${p.cantidad > 0 ? 'bg-vino' : 'bg-gray-300'} w-full py-2 text-white rounded-lg text-[9px] uppercase font-bold" 
-                                ${p.cantidad > 0 ? '' : 'disabled'}>
-                            ${p.cantidad > 0 ? 'Añadir al Carrito' : 'Agotado'}
+                                class="w-full py-3 ${agotado ? 'bg-gray-200 cursor-not-allowed' : 'bg-vino hover:bg-black'} text-white rounded-xl text-[9px] font-bold uppercase tracking-widest transition"
+                                ${agotado ? 'disabled' : ''}>
+                            ${agotado ? 'Sin Existencias' : 'Añadir al Pedido'}
                         </button>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
             lucide.createIcons();
         }
 
         function agregarAlCarrito(index) {
             if(inventario[index].cantidad > 0) {
-                carrito.push(inventario[index]);
+                carrito.push({...inventario[index]});
                 inventario[index].cantidad--;
                 actualizarCarrito();
                 render();
@@ -116,17 +130,23 @@
             document.getElementById('cart-count').innerText = carrito.length;
             const itemsCont = document.getElementById('cart-items');
             itemsCont.innerHTML = carrito.map((item, i) => `
-                <div class="flex justify-between items-center border-b pb-2 text-xs">
-                    <div>
-                        <p class="font-bold">${item.codigo}</p>
-                        <p class="text-gray-400">$${item.precio.toLocaleString()}</p>
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100 fade-in">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1">
+                            <img src="${RUTA_FOTOS}${item.codigo}.png" class="max-h-full" onerror="this.hidden=true">
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-800">${item.codigo}</p>
+                            <p class="text-vino text-[10px] font-bold">$${item.precio.toLocaleString()}</p>
+                        </div>
                     </div>
-                    <button onclick="quitarDelCarrito(${i})" class="text-red-400 text-[10px]">Quitar</button>
+                    <button onclick="quitarDelCarrito(${i})" class="text-gray-300 hover:text-red-500 transition"><i data-lucide="trash-2" size="16"></i></button>
                 </div>
             `).join('');
             
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             document.getElementById('cart-total').innerText = `$${total.toLocaleString()}`;
+            lucide.createIcons();
         }
 
         function quitarDelCarrito(i) {
@@ -142,27 +162,36 @@
             document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
         }
 
-        function enviarPedido() {
+        function enviarPedidoPorCorreo() {
             const nombre = document.getElementById('nombre-empleado').value;
-            const correo = document.getElementById('correo-empleado').value;
+            const idEmp = document.getElementById('id-empleado').value || 'N/A';
 
-            if(!nombre || !correo || carrito.length === 0) {
-                alert("Por favor completa tus datos y añade productos.");
+            if(!nombre || carrito.length === 0) {
+                alert("Por favor, ingresa tu nombre y añade al menos un producto.");
                 return;
             }
 
-            // CREACIÓN DEL OUTPUT PARA SAP
-            // Formato: Codigo | Cantidad | Precio | Empleado | Correo
-            let sapOutput = "DATOS PARA CARGA SAP:\n\n";
+            // ESTRUCTURA DE DATOS PARA SAP (Layout de carga manual)
+            let sapLayout = "SOLICITUD DE VENTA PRIVADA\r\n";
+            sapLayout += "============================\r\n";
+            sapLayout += `COLABORADOR: ${nombre}\r\n`;
+            sapLayout += `ID EMPLEADO: ${idEmp}\r\n`;
+            sapLayout += "============================\r\n\r\n";
+            sapLayout += "CODIGO\tCANT\tPRECIO_UNIT\tTOTAL\r\n";
+            
             carrito.forEach(item => {
-                sapOutput += `${item.codigo}\t1\t${item.precio}\t${nombre}\t${correo}\n`;
+                sapLayout += `${item.codigo}\t1\t${item.precio}\t${item.precio}\r\n`;
             });
 
-            const mensaje = encodeURIComponent(`Hola, soy ${nombre}. Adjunto mi pedido Regency:\n\n${sapOutput}`);
-            window.open(`https://wa.me/5255XXXXXXXX?text=${mensaje}`); // Cambia las X por tu número o el de Comercial
+            const totalFinal = carrito.reduce((sum, item) => sum + item.precio, 0);
+            sapLayout += `\r\nTOTAL DEL PEDIDO: $${totalFinal.toLocaleString()} MXN`;
+
+            const subject = encodeURIComponent(`Nuevo Pedido Regency: ${nombre}`);
+            const body = encodeURIComponent(sapLayout);
             
-            alert("Pedido generado con éxito. Se ha copiado la estructura de datos para el administrador.");
-            console.log(sapOutput); // Esto te sirve para copiar y pegar directo a Excel
+            window.location.href = `mailto:negocios@regency.com.mx?subject=${subject}&body=${body}`;
+            
+            alert("Se abrirá tu gestor de correo para enviar la transacción.");
         }
 
         window.onload = cargarDatos;
