@@ -3,117 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regency | Venta Privada</title>
+    <title>Regency Overseas | Corporativo</title>
+    <meta name="description" content="Regency Overseas: Distribuidora oficial de Guess Watches & Jewelry y Festina en México. Especialistas en alta relojería y joyería corporativa.">
+    <meta name="keywords" content="Regency Overseas, Guess Watches, Festina México, Joyería Polanco, Distribución Relojes">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b5e4caa42e3f08917d17cd4393dbf63b74a7d9fb/Logo%20PNG1.png" type="image/png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #FDFDFD; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #FDFDFD; color: #333; margin: 0; }
+        
         .luxury-text { font-family: 'Playfair Display', serif; }
         .bg-vino { background-color: #641E16; }
         .text-vino { color: #641E16; }
-        .fade-in { animation: fadeIn 1s ease-out; }
+        
+        .hero-video-container {
+            position: relative;
+            height: 70vh; 
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .overlay-dark {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            z-index: -1;
+        }
+        
+        .fade-in { animation: fadeIn 1.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .product-card:hover img { transform: scale(1.1); }
     </style>
 </head>
-<body>
+<body class="bg-[#FDFDFD]">
 
-    <nav class="bg-vino p-6 shadow-2xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center text-white">
-            <a href="../index.html" class="luxury-text text-2xl tracking-[0.2em] no-underline text-white uppercase">Regency Overseas</a>
-            <div class="text-right">
-                <p class="text-[9px] tracking-[0.3em] uppercase font-bold">Portal de Empleados</p>
-                <p id="counter" class="text-[8px] text-gray-400 uppercase">Stock Validado en Tiempo Real</p>
-            </div>
+<nav class="bg-vino text-white py-4 px-8 flex justify-between items-center sticky top-0 z-50 shadow-md">
+    
+    <div class="flex items-center gap-6">
+        <div class="luxury-text text-xl tracking-[0.3em]">
+            REGENCY OVERSEAS
         </div>
-    </nav>
-
-    <div class="relative h-[30vh] overflow-hidden flex items-center justify-center bg-black">
-        <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-50">
-            <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/Video%20Web.mp4" type="video/mp4">
-        </video>
-        <h1 class="relative luxury-text text-white text-4xl md:text-6xl tracking-widest uppercase fade-in">Venta Privada</h1>
+        
+        <div class="h-8 w-px bg-white/20"></div>
+        
+        <div class="flex items-center">
+            <img src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/ISO%209001%20REGENCY%20OVERSEAS.png" 
+                 alt="Certificación ISO 9001" 
+                 class="h-12 w-auto object-contain"> 
+            </div>
     </div>
 
-    <main class="max-w-7xl mx-auto p-12">
-        <div id="grid-productos" class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            </div>
-    </main>
+    <div class="hidden md:flex gap-8 items-center text-xs tracking-widest">
+        <a href="#quienes-somos" class="hover:text-gray-300 transition-colors">NOSOTROS</a>
+        <a href="#filosofia" class="hover:text-gray-300 transition-colors">FILOSOFÍA</a>
+        <a href="#marcas" class="hover:text-gray-300 transition-colors">MARCAS</a>
+        <a href="#contacto" class="hover:text-gray-300 transition-colors">CONTACTO</a>
+    </div>
+</nav>
+    <header class="hero-video-container">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/Video%20Web.mp4" type="video/mp4">
+            Tu navegador no soporta videos.
+        </video>
+
+        <div class="overlay-dark"></div>
+
+        <div class="relative z-10 text-center text-white px-6 fade-in">
+            <h1 class="luxury-text text-5xl md:text-8xl mb-4 drop-shadow-2xl tracking-wider uppercase">
+                Regency Overseas
+            </h1>
+            <p class="text-[10px] md:text-xs tracking-[0.5em] uppercase font-light italic">
+                Distribuidor Oficial de <span class="font-bold">Guess Watches & Jewelry</span> y <span class="font-bold">Festina</span>
+            </p>
+            <div class="h-px w-24 bg-white/30 mx-auto mt-10"></div>
+        </div>
+    </header>
 
     <script>
-        const URL_CSV = 'inventario.csv';
-        const RUTA_IMAGENES = 'https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/';
-        let inventario = [];
-
-        // 1. FUNCIÓN PARA CARGAR EL CSV
-        function cargarDatos() {
-            Papa.parse(URL_CSV, {
-                download: true,
-                header: true,
-                dynamicTyping: true,
-                complete: function(results) {
-                    // Sincronizar con el stock local o usar el del CSV
-                    const datosNuevos = results.data.filter(p => p.codigo);
-                    const localStock = JSON.parse(localStorage.getItem('regency_stock'));
-
-                    if (localStock && localStock.length === datosNuevos.length) {
-                        inventario = localStock;
-                    } else {
-                        inventario = datosNuevos;
-                    }
-                    render();
-                }
-            });
-        }
-
-        // 2. FUNCIÓN PARA DIBUJAR LA TIENDA
-        function render() {
-            const grid = document.getElementById('grid-productos');
-            grid.innerHTML = '';
-            
-            inventario.forEach((p, index) => {
-                const fotoUrl = `${RUTA_IMAGENES}${p.codigo}.png`;
-                const btnHTML = p.cantidad > 0 
-                    ? `<button onclick="comprar(${index})" class="w-full py-4 bg-vino text-white rounded-2xl text-[10px] font-bold tracking-widest uppercase hover:bg-black transition transform active:scale-95">Apartar Reloj</button>`
-                    : `<button disabled class="w-full py-4 bg-gray-200 text-gray-400 rounded-2xl text-[10px] font-bold tracking-widest uppercase cursor-not-allowed">Agotado</button>`;
-
-                grid.innerHTML += `
-                    <div class="product-card bg-white rounded-[40px] p-6 shadow-sm border border-gray-50 hover:shadow-2xl transition duration-500 fade-in">
-                        <div class="aspect-square bg-[#F9F9F9] rounded-[30px] mb-6 flex items-center justify-center p-8 overflow-hidden">
-                            <img src="${fotoUrl}" 
-                                 onerror="this.src='https://placehold.co/400x400/f3f4f6/641e16?text=${p.codigo}'" 
-                                 class="max-h-full transition duration-700">
-                        </div>
-                        <div class="space-y-4">
-                            <p class="text-[9px] text-gray-400 font-bold tracking-widest uppercase">${p.codigo}</p>
-                            <h3 class="luxury-text text-2xl text-gray-800">${p.marca} - ${p.division}</h3>
-                            <div class="flex justify-between items-center border-b border-gray-50 pb-4">
-                                <span class="text-vino font-bold text-lg">$${Number(p.precio).toLocaleString()}</span>
-                                <span class="text-[10px] font-black ${p.cantidad > 0 ? 'text-green-600' : 'text-red-400'} uppercase italic">Stock: ${p.cantidad}</span>
-                            </div>
-                            ${btnHTML}
-                        </div>
-                    </div>
-                `;
-            });
-            localStorage.setItem('regency_stock', JSON.stringify(inventario));
-        }
-
-        // 3. FUNCIÓN DE COMPRA
-        function comprar(index) {
-            if(inventario[index].cantidad > 0) {
-                const folio = Math.floor(Math.random() * 90000) + 10000;
-                inventario[index].cantidad--;
-                alert(`¡RESERVACIÓN EXITOSA!\n\nFolio: REG-${folio}\nModelo: ${inventario[index].codigo}\n\nPresenta este folio para tu descuento por nómina.`);
-                render();
-            }
-        }
-
-        // Iniciar carga al abrir la página
-        window.onload = cargarDatos;
+        lucide.createIcons();
     </script>
 </body>
 </html>
+
+<section id="quienes-somos" class="max-w-6xl mx-auto px-6 py-32 fade-in scroll-mt-24">
+    <div class="mb-16">
+        <h3 class="luxury-text text-4xl md:text-5xl text-gray-900 opacity-90">Quiénes Somos</h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        
+        <div class="md:col-span-12 mb-12">
+            <p class="luxury-text text-xl md:text-2xl text-vino italic leading-tight max-w-2xl">
+                Distribuidor Oficial en México de Relojes y Joyería GUESS.
+            </p>
+        </div>
+
+        <div class="md:col-span-5 md:mt-12">
+            <p class="text-gray-800 text-xl font-light leading-relaxed border-l border-gray-200 pl-8 italic">
+                Somos una empresa especializada en la comercialización de relojes en categorías de lujo, clásica, deportiva, casual y de moda.
+            </p>
+        </div>
+
+        <div class="md:col-span-6 md:col-start-7 space-y-12">
+            <p class="text-gray-500 text-sm md:text-base leading-relaxed tracking-wide">
+                Establecidos desde 1990 en la Ciudad de Panamá, contamos con presencia en Centroamérica y Sudamérica. En el año 2012, se inauguró en el corazón de la Ciudad de México, específicamente en Polanco nuestra oficina con el objetivo de atender la distribución de relojes y joyería de la marca Guess.
+            </p>
+            
+            <div class="pt-8 border-t border-gray-100">
+                <p class="text-gray-500 text-sm md:text-base leading-relaxed tracking-wide">
+                    Pertenecemos a la división de Swiss Sport Corp. representante de importantes marcas de relojes con más de 25 años de trayectoria, y que a su vez hace parte del Grupo Regency, un sólido grupo empresarial dedicado a diferentes actividades comerciales tales como la distribución de marcas reconocidas, ventas al retail, finanzas, logística, bienes raíces, entre otras.
+                </p>
+            </div>
+        </div>
+        
+    </div>
+    </section>
+
+    <main id="filosofia" class="scroll-mt-32 max-w-6xl mx-auto px-6 py-24 space-y-32">
+        
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <div class="space-y-8 fade-in">
+                <div class="flex items-center gap-4">
+                    <span class="h-1 w-12 bg-vino"></span>
+                    <h3 class="luxury-text text-4xl">Misión</h3>
+                </div>
+                <p class="text-gray-500 text-lg leading-relaxed font-light italic">
+                    "<span class="text-vino font-bold">CONECTAR</span> las marcas más prestigiosas de relojería, joyería y accesorios con nuestros socios comerciales y clientes, ofreciendo un servicio de comercialización y distribución eficiente, basado en la calidad, la experiencia y la satisfacción."
+                </p>
+            </div>
+
+            <div class="space-y-8 fade-in">
+                <div class="flex items-center gap-4">
+                    <span class="h-1 w-12 bg-vino"></span>
+                    <h3 class="luxury-text text-4xl">Visión</h3>
+                </div>
+                <p class="text-gray-500 text-lg leading-relaxed font-light italic">
+                    "Ser la empresa líder en la comercialización y distribución de relojería, joyería y accesorios, reconocida por nuestra capacidad de <span class="text-vino font-bold">CONECTAR</span> marcas con personas. Aspiramos a generar valor sostenible para nuestros clientes, colaboradores y accionistas."
+                </p>
+            </div>
+        </section>
+
+<section class="bg-[#1a1a1a] rounded-[60px] p-12 md:p-20 shadow-2xl fade-in">
+    <div class="text-center space-y-6 mb-16">
+        <h3 class="luxury-text text-4xl text-white">Filosofía Regency</h3>
+        <p class="text-gray-400 max-w-2xl mx-auto text-base leading-relaxed tracking-wide">
+            Nuestra filosofía se fundamenta en conectar marcas y personas a través de valores sólidos que guían cada acción y decisión:
+        </p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-12">
+        
+        <div class="group text-center space-y-4 w-full md:w-[28%] transition-all duration-500 hover:-translate-y-2">
+            <div class="h-20 w-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-md mb-4 transition-all duration-500 group-hover:bg-[#8B1D22] group-hover:shadow-xl">
+                <i data-lucide="users" class="text-[#8B1D22] w-10 h-10 transition-colors duration-500 group-hover:text-white"></i>
+            </div>
+            <h4 class="text-xs tracking-[0.4em] font-black uppercase text-gray-300 group-hover:text-[#8B1D22] transition-colors duration-500">Colaboración</h4>
+            <p class="text-sm text-gray-500 font-light leading-relaxed group-hover:text-[#8B1D22] transition-colors duration-500">Trabajamos en equipo para alcanzar objetivos comunes.</p>
+        </div>
+
+        <div class="group text-center space-y-4 w-full md:w-[28%] transition-all duration-500 hover:-translate-y-2">
+            <div class="h-20 w-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-md mb-4 transition-all duration-500 group-hover:bg-[#8B1D22] group-hover:shadow-xl">
+                <i data-lucide="lightbulb" class="text-[#8B1D22] w-10 h-10 transition-colors duration-500 group-hover:text-white"></i>
+            </div>
+            <h4 class="text-xs tracking-[0.4em] font-black uppercase text-gray-300 group-hover:text-[#8B1D22] transition-colors duration-500">Creatividad</h4>
+            <p class="text-sm text-gray-500 font-light leading-relaxed group-hover:text-[#8B1D22] transition-colors duration-500">Innovamos para ofrecer soluciones únicas y diferenciadoras.</p>
+        </div>
+
+        <div class="group text-center space-y-4 w-full md:w-[28%] transition-all duration-500 hover:-translate-y-2">
+            <div class="h-20 w-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-md mb-4 transition-all duration-500 group-hover:bg-[#8B1D22] group-hover:shadow-xl">
+                <i data-lucide="shield-check" class="text-[#8B1D22] w-10 h-10 transition-colors duration-500 group-hover:text-white"></i>
+            </div>
+            <h4 class="text-xs tracking-[0.4em] font-black uppercase text-gray-300 group-hover:text-[#8B1D22] transition-colors duration-500">Confianza</h4>
+            <p class="text-sm text-gray-500 font-light leading-relaxed group-hover:text-[#8B1D22] transition-colors duration-500">Construimos relaciones sólidas y transparentes.</p>
+        </div>
+
+        <div class="group text-center space-y-4 w-full md:w-[28%] transition-all duration-500 hover:-translate-y-2">
+            <div class="h-20 w-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-md mb-4 transition-all duration-500 group-hover:bg-[#8B1D22] group-hover:shadow-xl">
+                <i data-lucide="gem" class="text-[#8B1D22] w-10 h-10 transition-colors duration-500 group-hover:text-white"></i>
+            </div>
+            <h4 class="text-xs tracking-[0.4em] font-black uppercase text-gray-300 group-hover:text-[#8B1D22] transition-colors duration-500">Calidad</h4>
+            <p class="text-sm text-gray-500 font-light leading-relaxed group-hover:text-[#8B1D22] transition-colors duration-500">Garantizar excelencia en cada producto y servicio.</p>
+        </div>
+
+        <div class="group text-center space-y-4 w-full md:w-[28%] transition-all duration-500 hover:-translate-y-2">
+            <div class="h-20 w-20 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-md mb-4 transition-all duration-500 group-hover:bg-[#8B1D22] group-hover:shadow-xl">
+                <i data-lucide="heart" class="text-[#8B1D22] w-10 h-10 transition-colors duration-500 group-hover:text-white"></i>
+            </div>
+            <h4 class="text-xs tracking-[0.4em] font-black uppercase text-gray-300 group-hover:text-[#8B1D22] transition-colors duration-500">Cultura al Cliente</h4>
+            <p class="text-sm text-gray-500 font-light leading-relaxed px-4 group-hover:text-[#8B1D22] transition-colors duration-500">Vivimos la empatía para generar experiencias memorables.</p>
+        </div>
+    </div>
+</section>
+        
+<script>
+  lucide.createIcons();
+</script>
+
+<section id="marcas" class="scroll-mt-24 space-y-16 fade-in py-10">
+    <div class="text-center space-y-4">
+                <h3 class="luxury-text text-4xl text-gray-900">Nuestras Marcas</h3>
+                <p class="text-[10px] tracking-[0.4em] uppercase text-vino font-bold">Representación y Distribución Oficial</p>
+                <div class="h-px w-24 bg-vino mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" 
+                         style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Reloj%20Guess.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-3xl mb-2">Guess Watches</h4>
+                        <p class="text-[10px] leading-relaxed opacity-80 mb-6 font-light">Diseños icónicos que definen tendencias globales en relojería de moda.</p>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" 
+                         style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Joyeria%20Guess.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-3xl mb-2">Guess Jewelry</h4>
+                        <p class="text-[10px] leading-relaxed opacity-80 mb-6 font-light">Elegancia contemporánea y detalles sofisticados en cada pieza.</p>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" 
+                         style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Festina.jpg');"></div>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-3xl mb-2">Festina</h4>
+                        <p class="text-[10px] leading-relaxed opacity-80 mb-6 font-light">Tradición relojera y precisión con herencia europea.</p>
+                        <a href="https://festinagroup.mx/" target="_blank" class="w-fit py-3 px-6 border border-white/50 rounded-full text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition duration-500 no-underline text-white">Explorar Festina</a>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-[40px] h-[400px] shadow-2xl">
+                    <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-110" 
+                         style="background-image: url('https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b4f990b9953a14eb0764fabade995025e16060a3/Prueba%20Web%20Lotus.png');"></div>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                        <h4 class="luxury-text text-3xl mb-2">Lotus</h4>
+                        <p class="text-[10px] leading-relaxed opacity-80 mb-6 font-light">Estilo urbano y vanguardista para personalidades fuertes.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    
+<section id = "contacto" class="max-w-6xl mx-auto px-6 py-24 border-t border-gray-100 fade-in">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+        
+        <div class="space-y-12">
+            <div class="space-y-4">
+                <h3 class="luxury-text text-4xl text-gray-900">Contacto</h3>
+                <p class="text-vino text-[10px] tracking-[0.4em] uppercase font-bold">Oficinas Corporativas</p>
+            </div>
+
+            <div class="space-y-8 text-sm text-gray-500 font-light leading-relaxed">
+                <div class="flex gap-6">
+                    <i class="fa-solid fa-location-dot text-vino mt-1"></i>
+                    <p>Hegel 221, Polanco, Polanco V Secc,<br>Miguel Hidalgo, 11560 Ciudad de México, CDMX</p>
+                </div>
+                <div class="flex gap-6">
+                    <i class="fa-solid fa-phone text-vino mt-1"></i>
+                    <p>+52 55 4530 7907</p>
+                </div>
+                <div class="flex gap-6">
+                    <i class="fa-solid fa-envelope text-vino mt-1"></i>
+                    <p>ejemplo@regency.com.mx</p>
+                </div>
+                <div class="flex gap-6 border-t border-gray-50 pt-8">
+                    <i class="fa-solid fa-clock text-vino mt-1"></i>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-1 text-[11px]">
+                        <span>Lun — Jue:</span> <span class="text-gray-900 font-medium">8:00 - 17:00</span>
+                        <span>Viernes:</span> <span class="text-gray-900 font-medium">8:00 - 15:00</span>
+                        <span>Sáb — Dom:</span> <span class="text-gray-400">Cerrado</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-6">
+                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Conecta con nosotros</p>
+                <div class="flex items-center gap-6">
+                    <a href="https://www.linkedin.com/company/regencymx/" target="_blank" class="h-12 w-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#0077B5] transition duration-500 shadow-sm">
+                        <i class="fa-brands fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/regencymx/" target="_blank" class="h-12 w-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] transition duration-500 shadow-sm">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.facebook.com/RegencyMx/" target="_blank" class="h-12 w-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#1877F2] transition duration-500 shadow-sm">
+                        <i class="fa-brands fa-facebook-f text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+<div class="space-y-8" id="form-container">
+    <div class="space-y-2">
+        <h4 class="luxury-text text-2xl text-gray-900">Inicia una conversación</h4>
+        <p class="text-gray-400 text-xs font-light">Déjanos tus datos y un especialista se pondrá en contacto contigo.</p>
+    </div>
+    
+    <form id="contact-form" action="https://formspree.io/f/xvzvnoyl" method="POST" class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50 space-y-8 transition-all duration-700">
+        <div class="space-y-2">
+            <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Nombre Completo</label>
+            <input type="text" name="name" required class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light bg-transparent">
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-2">
+                <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Correo Electrónico</label>
+                <input type="email" name="_replyto" required class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light bg-transparent">
+            </div>
+            <div class="space-y-2">
+                <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Celular (Opcional)</label>
+                <input type="tel" name="phone" class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light bg-transparent" placeholder="+52">
+            </div>
+        </div>
+
+        <div class="space-y-2">
+            <label class="text-[9px] uppercase tracking-widest text-gray-400 font-bold ml-1">Mensaje corporativo</label>
+            <textarea name="message" rows="1" required class="w-full border-b border-gray-200 py-3 px-1 outline-none focus:border-vino transition duration-500 font-light resize-none bg-transparent"></textarea>
+        </div>
+
+        <button type="submit" id="submit-btn" class="w-full py-5 bg-vino text-white rounded-full text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-black transition duration-500 shadow-xl">
+            Enviar
+        </button>
+    </form>
+
+    <div id="success-message" class="hidden flex flex-col items-center justify-center p-20 text-center space-y-4 fade-in">
+        <div class="h-16 w-16 bg-vino/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa-solid fa-check text-vino text-2xl"></i>
+        </div>
+        <h4 class="luxury-text text-3xl text-gray-900">Gracias por su interés</h4>
+        <p class="text-gray-500 font-light text-sm max-w-xs mx-auto leading-relaxed">
+            Sus datos han sido recibidos con éxito. Un consultor especializado de Regency se pondrá en contacto con usted a la brevedad.
+        </p>
+        <div class="h-px w-20 bg-vino/20 mt-6"></div>
+    </div>
+</div>
+
+    <div id="success-message" class="hidden flex flex-col items-center justify-center p-20 text-center space-y-4 fade-in">
+        <div class="h-16 w-16 bg-vino/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa-solid fa-check text-vino text-2xl"></i>
+        </div>
+        <h4 class="luxury-text text-3xl text-gray-900">Gracias por su interés</h4>
+        <p class="text-gray-500 font-light text-sm max-w-xs mx-auto leading-relaxed">Sus datos han sido recibidos con éxito. Un consultor especializado de Regency se pondrá en contacto con usted a la brevedad.</p>
+        <div class="h-px w-20 bg-vino/20 mt-6"></div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="bg-gray-50 border-t border-gray-100 py-16 text-center space-y-6">
+        <p class="luxury-text text-xl text-gray-800">Regency Overseas</p>
+        <p class="text-[8px] tracking-[0.5em] text-gray-400 uppercase font-bold">
+            © 2026 México City | México
+        </p>
+    </footer>
+
+<script>
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.onsubmit = async (e) => {
+        e.preventDefault(); // Detiene la redirección
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "PROCESANDO...";
+        submitBtn.style.opacity = "0.7";
+
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                // Animación de salida del formulario
+                form.classList.add('opacity-0', 'scale-95');
+                
+                setTimeout(() => {
+                    form.style.display = 'none'; // Desaparece el formulario
+                    successMessage.classList.remove('hidden'); // Aparece el mensaje de lujo
+                    form.reset(); // Limpia los datos
+                }, 500);
+            } else {
+                alert("Error de comunicación. Asegúrate de haber puesto tu ID de Formspree correctamente.");
+                resetBtn();
+            }
+        } catch (error) {
+            alert("Error de conexión. Intente de nuevo.");
+            resetBtn();
+        }
+    };
+
+    function resetBtn() {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "ENVIAR";
+        submitBtn.style.opacity = "1";
+    }
+</script>    
 </body>
+</html>
 </html>
