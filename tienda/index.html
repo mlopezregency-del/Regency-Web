@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regency | Venta Privada Corporativa</title>
+    <title>Regency | Venta Privada</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b5e4caa42e3f08917d17cd4393dbf63b74a7d9fb/Logo%20PNG1.png" type="image/png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -14,39 +13,25 @@
         .luxury-text { font-family: 'Playfair Display', serif; }
         .bg-vino { background-color: #641E16; }
         .text-vino { color: #641E16; }
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        #cart-sidebar { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        
-        #toast {
-            visibility: hidden;
-            min-width: 300px;
-            background-color: #641E16;
-            color: #fff;
-            text-align: center;
-            border-radius: 50px;
-            padding: 16px 30px;
-            position: fixed;
-            z-index: 200;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 4.5s; }
-        @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
-        @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+        .filter-btn.active { background-color: #641E16; color: white; border-color: #641E16; }
+        #login-overlay { background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <div id="toast">Te mantendremos informado con tu pedido</div>
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay" class="fixed inset-0 z-[200] flex items-center justify-center p-6">
+        <div class="max-w-md w-full text-center space-y-8 fade-in">
+            <img src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/b5e4caa42e3f08917d17cd4393dbf63b74a7d9fb/Logo%20PNG1.png" class="h-16 mx-auto mb-4" alt="Logo">
+            <h2 class="luxury-text text-3xl uppercase tracking-widest text-vino">Acceso Privado</h2>
+            <p class="text-gray-500 text-sm italic">Por favor, ingresa la clave de acceso corporativo para continuar.</p>
+            <input type="password" id="access-code" placeholder="Contraseña" class="w-full p-4 border-b-2 border-gray-200 outline-none focus:border-vino transition text-center text-xl tracking-widest">
+            <button onclick="checkAccess()" class="w-full py-4 bg-vino text-white rounded-full text-xs font-bold uppercase tracking-[0.3em] hover:bg-black transition shadow-lg">Entrar al Catálogo</button>
+        </div>
+    </div>
 
-    <nav class="bg-vino text-white p-6 sticky top-0 z-50 shadow-2xl">
+    <!-- NAVBAR -->
+    <nav class="bg-vino text-white p-6 sticky top-0 z-50 shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="luxury-text text-xl tracking-[0.3em] uppercase italic">Regency Overseas</div>
             <button onclick="toggleCart()" class="relative p-2 hover:bg-white/10 rounded-full transition">
@@ -56,44 +41,38 @@
         </div>
     </nav>
 
-    <header class="relative h-[20vh] overflow-hidden flex items-center justify-center bg-black">
-        <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-40">
-            <source src="https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/Web/Video%20Web.mp4" type="video/mp4">
-        </video>
-        <h1 class="relative luxury-text text-white text-3xl uppercase tracking-widest text-center">Venta Privada Corporativa</h1>
-    </header>
-
-    <main class="max-w-7xl mx-auto p-8 w-full flex-grow">
-        <div id="grid-productos" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <p class="col-span-full text-center text-gray-400 animate-pulse uppercase tracking-widest text-xs">Sincronizando inventario exclusivo...</p>
+    <!-- FILTROS -->
+    <div class="bg-white border-b sticky top-[76px] z-40 overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-8 py-4 flex gap-4 items-center whitespace-nowrap">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mr-2">Filtrar:</span>
+            <button onclick="filterBy('TODOS')" class="filter-btn active px-6 py-2 rounded-full border text-[10px] font-bold uppercase tracking-widest transition">Todos</button>
+            <button onclick="filterBy('Lotus')" class="filter-btn px-6 py-2 rounded-full border text-[10px] font-bold uppercase tracking-widest transition">Lotus</button>
+            <button onclick="filterBy('Festina')" class="filter-btn px-6 py-2 rounded-full border text-[10px] font-bold uppercase tracking-widest transition">Festina</button>
+            <button onclick="filterBy('Guess')" class="filter-btn px-6 py-2 rounded-full border text-[10px] font-bold uppercase tracking-widest transition">Guess</button>
         </div>
+    </div>
+
+    <!-- GRID -->
+    <main class="max-w-7xl mx-auto p-8 w-full flex-grow">
+        <div id="grid-productos" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
     </main>
 
-    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white shadow-2xl z-[100] translate-x-full flex flex-col">
+    <!-- CARRITO (SIDEBAR) -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-white shadow-2xl z-[100] translate-x-full flex flex-col transition-transform duration-500">
         <div class="p-6 bg-vino text-white flex justify-between items-center">
-            <h2 class="luxury-text text-xl uppercase tracking-tight">Tu Selección</h2>
+            <h2 class="luxury-text text-xl uppercase">Pedido</h2>
             <button onclick="toggleCart()"><i data-lucide="x"></i></button>
         </div>
-        
         <div id="cart-items" class="flex-grow p-6 overflow-y-auto space-y-4"></div>
-
-        <form id="luxury-form" class="p-8 border-t border-gray-100 bg-gray-50 space-y-4">
-            <div class="space-y-3">
-                <label class="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Información de contacto</label>
-                <input type="text" name="Nombre" required placeholder="Nombre Completo" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-vino transition">
-                <input type="email" name="Email" required placeholder="Correo Corporativo" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-vino transition">
-                <input type="tel" name="Telefono" placeholder="Celular (Opcional)" class="w-full p-3 border rounded-xl text-sm outline-none focus:border-vino transition">
-                <textarea name="DETALLES_SAP" id="sap-output" class="hidden"></textarea>
-            </div>
-
-            <div class="flex justify-between font-bold text-lg border-t border-b py-4 my-4">
-                <span class="luxury-text uppercase text-xs">Total de la Selección:</span>
+        <form id="luxury-form" class="p-8 border-t bg-gray-50 space-y-4">
+            <input type="text" name="Nombre" required placeholder="Nombre" class="w-full p-3 border rounded-xl text-sm outline-none">
+            <input type="email" name="Email" required placeholder="Email Corporativo" class="w-full p-3 border rounded-xl text-sm outline-none">
+            <textarea name="DETALLES_SAP" id="sap-output" class="hidden"></textarea>
+            <div class="flex justify-between font-bold text-lg py-2 border-t">
+                <span class="text-xs uppercase">Total:</span>
                 <span id="cart-total" class="text-vino font-black">$0</span>
             </div>
-            
-            <button type="submit" id="submit-btn" class="w-full py-4 bg-vino text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all shadow-lg flex justify-center items-center">
-                <span id="btn-text">Confirmar Pedido</span>
-            </button>
+            <button type="submit" class="w-full py-4 bg-vino text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.3em]">Enviar Solicitud</button>
         </form>
     </div>
 
@@ -101,69 +80,75 @@
         const URL_CSV = 'inventario.csv';
         const RUTA_FOTOS = 'https://raw.githubusercontent.com/mlopezregency-del/Catalogo-Regency/main/';
         let inventario = [];
+        let filtrados = [];
         let carrito = [];
+
+        function checkAccess() {
+            if(document.getElementById('access-code').value === "REGENCY2024") { // Cambia la clave aquí
+                document.getElementById('login-overlay').style.display = 'none';
+            } else { alert("Código incorrecto"); }
+        }
 
         function cargarDatos() {
             Papa.parse(`${URL_CSV}?t=${new Date().getTime()}`, {
                 download: true, header: true, dynamicTyping: true, skipEmptyLines: true,
                 complete: function(results) {
-                    // Mapeo dinámico según tu nueva estructura de Excel
                     inventario = results.data.map(p => ({
                         codigo: String(p["Modelo"] || "").trim(),
                         marca_id: String(p["Marca"] || "").trim(),
-                        marca_nombre: String(p["Marca completa"] || "").split(' ')[0], // Ejemplo: "Lotus"
+                        marca_nombre: String(p["Marca completa"] || "").split(' ')[0],
                         categoria: String(p["Marca completa"] || "").includes('Relojeria') ? 'Relojería' : 'Joyería',
                         cantidad: parseInt(p["Pedido"]) || 0,
                         precio_pub: parseFloat(p["Precio público"]) || 0,
-                        precio_esp: parseFloat(p["Precio espec"]) || 0,
-                        descuento_txt: p["Descuento"] || ""
+                        precio_esp: parseFloat(p["Precio especial"]) || 0, // Corregido acento
+                        descuento: p["Descuento"] || ""
                     })).filter(p => p.codigo !== "");
+                    filtrados = [...inventario];
                     render();
                 }
             });
         }
 
+        function filterBy(marca) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            filtrados = marca === 'TODOS' ? inventario : inventario.filter(p => p.marca_nombre.toLowerCase() === marca.toLowerCase());
+            render();
+        }
+
         function render() {
             const grid = document.getElementById('grid-productos');
-            grid.innerHTML = inventario.map((p, index) => {
-                let sub = "";
-                if (p.marca_id === "LR" || p.marca_id === "LJ") sub = "Lotus/";
-                else if (p.marca_id === "FT") sub = "Festina/";
-                else if (p.marca_id === "GR") sub = "GuessWatches/";
-                else if (p.marca_id === "GJ") sub = "GuessJewelry/";
-                
+            grid.innerHTML = filtrados.map((p, index) => {
+                let sub = p.marca_id === "LR" ? "Lotus/" : p.marca_id === "FT" ? "Festina/" : p.marca_id === "GR" ? "GuessWatches/" : "GuessJewelry/";
                 const fotoUrl = `${RUTA_FOTOS}${sub}${p.codigo}.png`;
                 const agotado = p.cantidad <= 0;
-                const ahorro = Math.round(((p.precio_pub - p.precio_esp) / p.precio_pub) * 100);
 
                 return `
-                <div class="bg-white rounded-[40px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 fade-in group relative overflow-hidden">
-                    
-                    ${ahorro > 0 ? `
-                    <div class="absolute top-4 right-4 bg-yellow-400 text-black text-[9px] font-black px-3 py-1 rounded-full shadow-sm z-10 uppercase">
-                        Oportunidad -${ahorro}%
-                    </div>` : ''}
-
-                    <div class="aspect-square bg-[#F9F9F9] rounded-[20px] mb-6 flex items-center justify-center p-2 overflow-hidden">
-                        <img src="${fotoUrl}" class="max-h-full group-hover:scale-110 transition duration-700" onerror="this.src='https://placehold.co/400x400/f8f8f8/641e16?text=${p.codigo}'">
+                <div class="bg-white rounded-[40px] p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 relative group overflow-hidden">
+                    <!-- Badge Chic de Descuento -->
+                    <div class="absolute top-6 right-6 bg-[#8E1B1B] text-white text-[10px] font-black px-3 py-1.5 rounded-lg shadow-lg z-10">
+                        ${p.descuento} OFF
                     </div>
 
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-start">
-                            <span class="text-[8px] font-black text-gray-400 uppercase tracking-[0.2em]">${p.codigo}</span>
-                            <span class="text-[8px] font-bold ${agotado ? 'text-red-400' : 'text-green-600'} uppercase">Stock: ${p.cantidad}</span>
-                        </div>
-                        
-                        <h3 class="luxury-text text-xl text-gray-900 leading-tight uppercase tracking-tight">${p.marca_nombre}</h3>
-                        <p class="text-[9px] text-gray-400 uppercase tracking-widest font-medium">${p.categoria}</p>
+                    <div class="aspect-square bg-[#F9F9F9] rounded-[30px] mb-6 flex items-center justify-center p-4">
+                        <img src="${fotoUrl}" class="max-h-full transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x400/f8f8f8/641e16?text=${p.codigo}'">
+                    </div>
 
-                        <div class="pt-3 flex items-baseline gap-2">
-                            <span class="text-gray-300 line-through text-xs font-light">$${p.precio_pub.toLocaleString()}</span>
-                            <span class="text-vino font-black text-2xl tracking-tighter">$${p.precio_esp.toLocaleString()}</span>
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-center text-[9px] font-bold tracking-widest text-gray-400">
+                            <span>MOD: ${p.codigo}</span>
+                            <span class="${agotado ? 'text-red-500' : 'text-green-600'}">STOCK: ${p.cantidad}</span>
+                        </div>
+                        <h3 class="luxury-text text-2xl text-gray-900 uppercase">${p.marca_nombre}</h3>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-4">${p.categoria}</p>
+
+                        <div class="flex items-baseline gap-3 pt-2">
+                            <span class="text-gray-300 line-through text-sm">$${p.precio_pub.toLocaleString()}</span>
+                            <span class="text-vino font-black text-3xl tracking-tighter">$${p.precio_esp.toLocaleString()}</span>
                         </div>
 
-                        <button onclick="agregarAlCarrito(${index})" 
-                                class="w-full mt-4 py-3 ${agotado ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-vino text-white hover:bg-black'} rounded-xl text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-lg"
+                        <button onclick="agregarAlCarrito('${p.codigo}')" 
+                                class="w-full mt-4 py-4 ${agotado ? 'bg-gray-100' : 'bg-vino hover:bg-black'} text-white rounded-2xl text-[10px] font-bold uppercase tracking-widest transition shadow-md"
                                 ${agotado ? 'disabled' : ''}>
                             ${agotado ? 'Agotado' : 'Añadir a mi Selección'}
                         </button>
@@ -173,10 +158,11 @@
             lucide.createIcons();
         }
 
-        function agregarAlCarrito(index) {
-            if(inventario[index].cantidad > 0) {
-                carrito.push({...inventario[index]});
-                inventario[index].cantidad--;
+        function agregarAlCarrito(codigo) {
+            const prod = inventario.find(p => p.codigo === codigo);
+            if(prod && prod.cantidad > 0) {
+                carrito.push({...prod});
+                prod.cantidad--;
                 actualizarCarrito();
                 render();
             }
@@ -186,70 +172,29 @@
             document.getElementById('cart-count').innerText = carrito.length;
             const itemsCont = document.getElementById('cart-items');
             itemsCont.innerHTML = carrito.map((item, i) => `
-                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">${item.codigo}</p>
-                        <p class="text-gray-800 text-xs font-bold">${item.marca_nombre}</p>
-                        <p class="text-vino text-xs font-black">$${item.precio_esp.toLocaleString()}</p>
+                        <p class="text-[10px] font-bold text-gray-400">${item.codigo}</p>
+                        <p class="text-sm font-bold">${item.marca_nombre}</p>
+                        <p class="text-vino font-black">$${item.precio_esp.toLocaleString()}</p>
                     </div>
-                    <button onclick="quitarDelCarrito(${i})" class="text-gray-300 hover:text-red-500 transition"><i data-lucide="trash-2" size="16"></i></button>
+                    <button onclick="quitar(${i})" class="text-gray-300 hover:text-red-500"><i data-lucide="trash-2"></i></button>
                 </div>`).join('');
             
             const total = carrito.reduce((sum, item) => sum + item.precio_esp, 0);
             document.getElementById('cart-total').innerText = `$${total.toLocaleString()}`;
-
-            let sapText = "REPORTE DE PEDIDO CORPORATIVO\n============================\n";
-            carrito.forEach(item => { sapText += `MODELO: ${item.codigo} | MARCA: ${item.marca_nombre} | PRECIO: ${item.precio_esp}\n`; });
-            document.getElementById('sap-output').value = sapText;
             lucide.createIcons();
         }
 
-        function quitarDelCarrito(i) {
+        function quitar(i) {
             const item = carrito[i];
-            const idxOriginal = inventario.findIndex(p => p.codigo === item.codigo);
-            if(idxOriginal !== -1) inventario[idxOriginal].cantidad++;
+            inventario.find(p => p.codigo === item.codigo).cantidad++;
             carrito.splice(i, 1);
             actualizarCarrito();
             render();
         }
 
         function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
-
-        function showLuxuryToast() {
-            const x = document.getElementById("toast");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
-        }
-
-        const form = document.getElementById('luxury-form');
-        form.addEventListener("submit", async function(e) {
-            e.preventDefault();
-            if(carrito.length === 0) return;
-            const btn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            btn.disabled = true;
-            btnText.innerText = "ENVIANDO SOLICITUD...";
-
-            try {
-                const response = await fetch("https://formspree.io/f/xvzvnoyl", {
-                    method: "POST",
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    showLuxuryToast();
-                    carrito = [];
-                    actualizarCarrito();
-                    setTimeout(() => { toggleCart(); }, 800);
-                    form.reset();
-                }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                btn.disabled = false;
-                btnText.innerText = "Confirmar Pedido";
-            }
-        });
 
         window.onload = cargarDatos;
     </script>
